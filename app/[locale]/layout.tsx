@@ -10,9 +10,7 @@ import * as Header from '@/components/atom/Header/Header'
 import { Metadata, Viewport } from 'next'
 import { routes } from '@/constants/routes'
 import * as styles from '@/app/[locale]/layout.css'
-import { SearchCommandDialog } from '@/app/[locale]/components/SearchCommandDialog/SearchCommandDialog'
 import { Link } from '@/components/atom/Link/Link'
-import { Authentication } from '@/app/[locale]/components/Authentication/Authentication'
 import { Menu } from '@/app/[locale]/components/Menu/Menu'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
@@ -80,12 +78,12 @@ export default function LocaleLayout({
                 </Link>
               </Header.LeftContent>
               <Header.RightContent>
-                <Authentication />
+                {/* <Authentication /> */}
               </Header.RightContent>
             </Header.Root>
             {children}
             <div className={styles.floatingButtonGroup}>
-              <SearchCommandDialog />
+              {/* <SearchCommandDialog /> */}
               <Menu />
             </div>
           </ReactQueryClientProvider>

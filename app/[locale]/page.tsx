@@ -1,17 +1,42 @@
 'use client'
 
 import * as styles from '@/app/[locale]/page.css'
-import Posts from '@/app/components/Posts/Posts'
-import PostsLoading from '@/app/components/Posts/PostsLoading'
-import { Suspense } from 'react'
 
 export default function LocalePage() {
   return (
     <main>
       <section className={styles.section}>
-        <Suspense fallback={<PostsLoading />}>
-          <Posts />
-        </Suspense>
+        <h1>서비스 종료 안내</h1>
+        <p>
+          안녕하세요, 정태훈입니다. 2021년 1월 9일의 첫 커밋을 시작으로 벌써
+          4년이 넘는 시간이 흘렀네요.
+        </p>
+        <p>
+          React를 배우기 위한 사이드 프로젝트로 시작했던 프로젝트였는데, 많은
+          분들이 찾아주시고 격려를 주신 점 진심으로 감사드립니다.
+        </p>
+        <br />
+        <p>
+          그렇지만, 저에게 더이상 이 프로젝트에 대해 이어갈 의지치가 없음을
+          느꼈습니다. 그동안 회사일이 바쁘다, 결혼준비 하느라 정신없다는 핑계로
+          서비스 관리에 소홀했고 지금 와 되돌아보니 기다려주시는 많은 분들께
+          죄송하다는 마음이 먼저 들었습니다.
+        </p>
+        <p>
+          더 이상 이렇게 지속하기 보다는, 프로젝트를 아카이브하고 사용자
+          분들께서 다른 프로젝트를 보시는게 더 낫다는 판단을 하게 되었습니다.
+        </p>
+        <br />
+        <p>
+          그동안 TechBlogPosts에 관심을 가져주셔서 정말 감사드리며, 추후 저에게
+          또다른 의지가 생긴다면 그 때 새로운 프로젝트로 다시 찾아뵙겠습니다.
+        </p>
+        <br />
+        <p>
+          <span>감사합니다.</span>
+          <br />
+          <span>정태훈 드림</span>
+        </p>
       </section>
     </main>
   )
