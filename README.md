@@ -1,6 +1,6 @@
 # 🛠️ TechBlogPosts Reborn – 기술 블로그 모음
 
-IT 기술 블로그들의 최신 포스트를 한곳에서 모아보세요.  
+IT 기술 블로그들의 최신 포스트를 한곳에서 모아보세요.
 
 ## 🔧 Built With
 
@@ -11,7 +11,7 @@ IT 기술 블로그들의 최신 포스트를 한곳에서 모아보세요.
 ## ✨ 프로젝트 연혁
 
 - **2023 ~ 2025**: [JthCast](https://jthcast.dev)
-- **2025 ~**: [MyungSub0519](https://github.com/MyungSub0519) & [yoonhyunwoo](https://github.com/yoonhyunwoo)
+- **2025 ~**: [MyungSub0519](https://github.com/MyungSub0519) & [yoonhyunwoo](https://github.com/yoonhyunwoo) & [LeeBhin](https://github.com/LeeBhin)
 
 ## 📄 License & Credits
 
