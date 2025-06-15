@@ -1,0 +1,15 @@
+.home-page {
+  min-height: calc(100vh - 64px);
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.load-more-trigger {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-lg) 0;
+  min-height: 80px;
+}

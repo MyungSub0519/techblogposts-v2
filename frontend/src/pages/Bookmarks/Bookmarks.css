@@ -1,0 +1,21 @@
+.bookmarks-page {
+  min-height: calc(100vh - 64px);
+}
+
+.bookmarks-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.bookmarks-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .bookmarks-title {
+    font-size: 1.5rem;
+  }
+}

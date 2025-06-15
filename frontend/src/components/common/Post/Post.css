@@ -1,0 +1,138 @@
+.post {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.post:last-child {
+  border-bottom: none;
+}
+
+.post-title {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.post-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.post-title a:hover {
+  color: var(--accent-primary);
+}
+
+.post-title a:visited {
+  color: var(--text-secondary);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.post-meta-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.post-meta-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.post-company-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.post-company {
+  font-weight: 500;
+}
+
+.post-time {
+  color: var(--text-tertiary);
+}
+
+.post-view-count {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-tertiary);
+}
+
+.post-bookmark-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: -8px -8px -8px 0;
+}
+
+.post-bookmark-button:hover {
+  background-color: var(--fill-tertiary);
+}
+
+/* Loading skeleton */
+.post-skeleton {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.post-skeleton-title {
+  height: 1.5rem;
+  width: 70%;
+  background-color: var(--fill-secondary);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.post-skeleton-meta {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.post-skeleton-company {
+  height: 1rem;
+  width: 80px;
+  background-color: var(--fill-secondary);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.post-skeleton-time {
+  height: 1rem;
+  width: 60px;
+  background-color: var(--fill-secondary);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 640px) {
+  .post-title {
+    font-size: 1rem;
+  }
+  
+  .post-meta {
+    font-size: 0.8125rem;
+  }
+}
