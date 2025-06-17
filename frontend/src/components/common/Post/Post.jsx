@@ -1,14 +1,11 @@
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ko } from 'date-fns/locale'
-import { Eye, Star } from 'lucide-react'
+import { Eye } from 'lucide-react'
 import { companyIcons } from '../../../utils/constants'
-import Button from '../Button/Button'
 import './Post.css'
 
 export default function Post({ 
   post, 
-  isBookmarked = false, 
-  onBookmarkToggle,
   onViewCountUpdate 
 }) {
   const { id, title, company, publishDate, viewCount } = post._source
@@ -16,11 +13,6 @@ export default function Post({
   const handleClick = () => {
     window.open(id, '_blank', 'noopener,noreferrer')
     onViewCountUpdate?.(id)
-  }
-
-  const handleBookmarkClick = (e) => {
-    e.stopPropagation()
-    onBookmarkToggle?.()
   }
 
   const companyIcon = companyIcons[company]
@@ -68,22 +60,6 @@ export default function Post({
             <Eye size={14} />
             <span>{viewCount.toLocaleString()}</span>
           </div>
-          
-          {onBookmarkToggle && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="post-bookmark-button"
-              onClick={handleBookmarkClick}
-              aria-label={isBookmarked ? '북마크 제거' : '북마크 추가'}
-            >
-              <Star 
-                size={16} 
-                fill={isBookmarked ? 'var(--accent-primary)' : 'none'}
-                color={isBookmarked ? 'var(--accent-primary)' : 'currentColor'}
-              />
-            </Button>
-          )}
         </div>
       </div>
     </article>

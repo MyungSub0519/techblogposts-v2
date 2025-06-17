@@ -43,12 +43,6 @@ export default function Header() {
             >
               블로그
             </Link>
-            <Link 
-              to={routes.bookmarks} 
-              className={`header-nav-link ${location.pathname === routes.bookmarks ? 'active' : ''}`}
-            >
-              북마크
-            </Link>
           </nav>
 
           <div className="header-right">

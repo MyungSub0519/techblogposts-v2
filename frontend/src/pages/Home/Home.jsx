@@ -1,6 +1,5 @@
-import { useInfiniteQuery, useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getPosts, postViewCount, addBookmark, deleteBookmark } from '../../api'
-import { getAuth, getBookmarks } from '../../api'
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { getPosts, postViewCount } from '../../api'
 import { queryKeys } from '../../utils/constants'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
 import Post from '../../components/common/Post/Post'
@@ -10,21 +9,6 @@ import Empty from '../../components/common/Empty/Empty'
 import './Home.css'
 
 export default function Home() {
-  const queryClient = useQueryClient()
-  
-  // 사용자 정보 조회
-  const { data: authData } = useQuery({
-    queryKey: queryKeys.auth,
-    queryFn: getAuth,
-  })
-
-  // 북마크 목록 조회
-  const { data: bookmarksData } = useQuery({
-    queryKey: queryKeys.bookmarks(authData?.user?.uid),
-    queryFn: () => getBookmarks({ uid: authData.user.uid }),
-    enabled: !!authData?.user?.uid,
-  })
-
   // 포스트 목록 조회 (무한 스크롤)
   const {
     data,
@@ -44,53 +28,11 @@ export default function Home() {
     mutationFn: postViewCount,
   })
 
-  // 북마크 추가
-  const addBookmarkMutation = useMutation({
-    mutationFn: addBookmark,
-    onSuccess: () => {
-      // 북마크 목록 다시 조회
-      queryClient.invalidateQueries(queryKeys.bookmarks(authData?.user?.uid))
-    },
-  })
-
-  // 북마크 삭제
-  const deleteBookmarkMutation = useMutation({
-    mutationFn: deleteBookmark,
-    onSuccess: () => {
-      // 북마크 목록 다시 조회
-      queryClient.invalidateQueries(queryKeys.bookmarks(authData?.user?.uid))
-    },
-  })
-
   // 무한 스크롤 설정
   const loadMoreRef = useInfiniteScroll({
     callback: fetchNextPage,
     hasMore: hasNextPage,
   })
-
-  // 북마크 토글
-  const handleBookmarkToggle = (postId) => {
-    if (!authData?.user?.uid) {
-      alert('로그인이 필요합니다.')
-      return
-    }
-
-    const isBookmarked = bookmarksData?.bookmarks.some(
-      bookmark => bookmark._source.parent === postId
-    )
-
-    if (isBookmarked) {
-      deleteBookmarkMutation.mutate({
-        uid: authData.user.uid,
-        parent: postId,
-      })
-    } else {
-      addBookmarkMutation.mutate({
-        uid: authData.user.uid,
-        parent: postId,
-      })
-    }
-  }
 
   if (isLoading) {
     return (
@@ -134,21 +76,13 @@ export default function Home() {
     <div className="home-page">
       <div className="container">
         <div className="post-list">
-          {posts.map((post) => {
-            const isBookmarked = bookmarksData?.bookmarks.some(
-              bookmark => bookmark._source.parent === post._source.id
-            )
-
-            return (
-              <Post
-                key={post._id}
-                post={post}
-                isBookmarked={isBookmarked}
-                onBookmarkToggle={() => handleBookmarkToggle(post._source.id)}
-                onViewCountUpdate={(id) => viewCountMutation.mutate({ id })}
-              />
-            )
-          })}
+          {posts.map((post) => (
+            <Post
+              key={post._id}
+              post={post}
+              onViewCountUpdate={(id) => viewCountMutation.mutate({ id })}
+            />
+          ))}
         </div>
 
         {/* 무한 스크롤 타겟 */}

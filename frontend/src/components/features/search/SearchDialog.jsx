@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { Command } from 'cmdk'
 import { Search } from 'lucide-react'
-import { searchPosts, postViewCount, getAuth, getBookmarks } from '../../../api'
+import { searchPosts, postViewCount } from '../../../api'
 import { queryKeys } from '../../../utils/constants'
 import { useDebounce } from '../../../hooks/useDebounce'
 import Post from '../../common/Post/Post'
@@ -12,19 +12,6 @@ import './SearchDialog.css'
 export default function SearchDialog({ isOpen, onClose }) {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 300)
-
-  // 사용자 정보 조회
-  const { data: authData } = useQuery({
-    queryKey: queryKeys.auth,
-    queryFn: getAuth,
-  })
-
-  // 북마크 목록 조회
-  const { data: bookmarksData } = useQuery({
-    queryKey: queryKeys.bookmarks(authData?.user?.uid),
-    queryFn: () => getBookmarks({ uid: authData.user.uid }),
-    enabled: !!authData?.user?.uid,
-  })
 
   // 검색 결과 조회
   const { data, isLoading } = useQuery({
@@ -96,29 +83,22 @@ export default function SearchDialog({ isOpen, onClose }) {
 
             {!isLoading && searchResults.length > 0 && (
               <Command.Group heading="검색 결과" className="search-group">
-                {searchResults.map((post) => {
-                  const isBookmarked = bookmarksData?.bookmarks.some(
-                    bookmark => bookmark._source.parent === post._source.id
-                  )
-
-                  return (
-                    <Command.Item
-                      key={post._id}
-                      value={post._source.title}
-                      onSelect={() => handlePostSelect(post)}
-                      className="search-item"
-                    >
-                      <Post
-                        post={post}
-                        isBookmarked={isBookmarked}
-                        onBookmarkToggle={(e) => {
-                          e?.stopPropagation()
-                          // 북마크 기능은 여기서 구현
-                        }}
-                      />
-                    </Command.Item>
-                  )
-                })}
+                {searchResults.map((post) => (
+                  <Command.Item
+                    key={post._id}
+                    value={post._source.title}
+                    onSelect={() => handlePostSelect(post)}
+                    className="search-item"
+                  >
+                    <Post
+                      post={post}
+                      isBookmarked={false}
+                      onBookmarkToggle={(e) => {
+                        e?.stopPropagation()
+                      }}
+                    />
+                  </Command.Item>
+                ))}
               </Command.Group>
             )}
           </Command.List>

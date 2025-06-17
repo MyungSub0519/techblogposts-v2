@@ -1,40 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
-import { getBlogs } from '../../api'
-import { queryKeys, companyIcons } from '../../utils/constants'
-import Loading from '../../components/common/Loading/Loading'
-import Empty from '../../components/common/Empty/Empty'
+import { companyIcons } from '../../utils/constants'
 import './Blogs.css'
 
 export default function Blogs() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: queryKeys.blogs,
-    queryFn: getBlogs,
-  })
-
-  if (isLoading) {
-    return (
-      <div className="blogs-page">
-        <div className="container">
-          <Loading text="블로그 목록을 불러오는 중..." />
-        </div>
-      </div>
-    )
-  }
-
-  if (isError) {
-    return (
-      <div className="blogs-page">
-        <div className="container">
-          <Empty
-            title="오류가 발생했습니다"
-            description="블로그 목록을 불러올 수 없습니다."
-          />
-        </div>
-      </div>
-    )
-  }
-
-  const blogs = data?.blogs || []
+  const blogs = Object.entries(companyIcons).map(([title, icon]) => ({
+    _id: title,
+    _source: {
+      id: `https://${title.toLowerCase().replace(/\s+/g, '')}.blog`,
+      title,
+    }
+  }))
 
   return (
     <div className="blogs-page">
@@ -89,13 +63,13 @@ export default function Blogs() {
             원하시는 기업의 기술 블로그가 목록에 없나요?
           </h3>
           <p className="contact-description">
-            저에게 알려주세요. 추가하겠습니다. 🙌
+            저에게 알려주세요. 추가하겠습니다.
           </p>
           <a
             href="mailto:jthcast@gmail.com"
             className="contact-button"
           >
-            제보하기 📧
+            제보하기
           </a>
         </section>
       </div>
